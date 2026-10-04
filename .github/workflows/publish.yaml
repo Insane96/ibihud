@@ -46,7 +46,7 @@ jobs:                                     #The place where you actually tell the
       - name: Publish (CurseForge+Modrinth)
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          curseforge-id: ibihud
+          curseforge-id: 1725746
           curseforge-token: "${{env.CURSEFORGE_TOKEN}}"
 
           modrinth-id: ldFbLOTE
