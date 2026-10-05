@@ -39,7 +39,7 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
   optional payload lets clients without it join servers that have it.
 - HUD toggles are client config only; the server decides which items/blocks enable the infos, only through tags.
 - Client-only code (`Minecraft`, GUI events) must not be reachable from the common entrypoint.
-- Lang keys are currently still `hud_info.*` (to be moved to the mod namespace, see `DESIGN.md`); biome names use
+- Lang keys use the mod namespace (`itemblockinfohud.*`, built with `ItemBlockInfoHud.lang(path)`); biome names use
   vanilla `biome.<namespace>.<path>` keys.
 
 ## Commands

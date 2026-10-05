@@ -3,16 +3,16 @@
     "itemblockinfohud.configuration.section.itemblockinfohud.client.toml": "Item & Block Info Hud Configs",
     "itemblockinfohud.configuration.section.itemblockinfohud.client.toml.title": "Item & Block Info Hud Configs",
 
-    "hud_info.cardinal_direction.south": "South",
-    "hud_info.cardinal_direction.south_west": "South West",
-    "hud_info.cardinal_direction.west": "West",
-    "hud_info.cardinal_direction.north_west": "North West",
-    "hud_info.cardinal_direction.north": "North",
-    "hud_info.cardinal_direction.north_east": "North East",
-    "hud_info.cardinal_direction.east": "East",
-    "hud_info.cardinal_direction.south_east": "South East",
-    "hud_info.depth": "Altitude: %d",
-    "hud_info.time": "%s (Day: %d)",
+    "itemblockinfohud.cardinal_direction.south": "South",
+    "itemblockinfohud.cardinal_direction.south_west": "South West",
+    "itemblockinfohud.cardinal_direction.west": "West",
+    "itemblockinfohud.cardinal_direction.north_west": "North West",
+    "itemblockinfohud.cardinal_direction.north": "North",
+    "itemblockinfohud.cardinal_direction.north_east": "North East",
+    "itemblockinfohud.cardinal_direction.east": "East",
+    "itemblockinfohud.cardinal_direction.south_east": "South East",
+    "itemblockinfohud.depth": "Altitude: %d",
+    "itemblockinfohud.time": "%s (Day: %d)",
 
     "itemblockinfohud.warning.missing_on_server": "[Item & Block Info Hud] The mod won't work on this server: it must be installed on the server too."
 }

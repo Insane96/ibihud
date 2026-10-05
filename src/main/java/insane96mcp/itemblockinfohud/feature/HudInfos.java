@@ -89,7 +89,7 @@ public class HudInfos extends Feature {
     }
 
     public static void renderDepth(Player player, List<String> toDraw) {
-        toDraw.add(Component.translatable("hud_info.depth", player.getBlockY()).getString());
+        toDraw.add(Component.translatable(ItemBlockInfoHud.lang("depth"), player.getBlockY()).getString());
     }
 
     public static void tryRenderBiome(Player player, List<String> toDraw) {
@@ -117,7 +117,7 @@ public class HudInfos extends Feature {
 
     public static void renderTime(Player player, List<String> toDraw) {
         long dayTime = player.level().getDayTime();
-        toDraw.add(Component.translatable("hud_info.time", ticksToTimeString(dayTime), player.level().getGameTime() / 24000).getString());
+        toDraw.add(Component.translatable(ItemBlockInfoHud.lang("time"), ticksToTimeString(dayTime), player.level().getGameTime() / 24000).getString());
     }
 
     public static String ticksToTimeString(long ticks) {
@@ -159,21 +159,21 @@ public class HudInfos extends Feature {
     private static @NotNull String getDirectionTranslatable(float direction) {
         String d = "";
         if (direction > -22.5 && direction <= 22.5)
-            d = "hud_info.cardinal_direction.south";
+            d = "cardinal_direction.south";
         else if (direction > 22.5 && direction <= 67.5)
-            d = "hud_info.cardinal_direction.south_west";
+            d = "cardinal_direction.south_west";
         else if (direction > 67.5 && direction <= 112.5)
-            d = "hud_info.cardinal_direction.west";
+            d = "cardinal_direction.west";
         else if (direction > 112.5 && direction <= 157.5)
-            d = "hud_info.cardinal_direction.north_west";
+            d = "cardinal_direction.north_west";
         else if (direction > 157.5 || direction <= -157.5)
-            d = "hud_info.cardinal_direction.north";
+            d = "cardinal_direction.north";
         else if (direction > -157.5 && direction <= -112.5)
-            d = "hud_info.cardinal_direction.north_east";
+            d = "cardinal_direction.north_east";
         else if (direction > -112.5 && direction <= -67.5)
-            d = "hud_info.cardinal_direction.east";
+            d = "cardinal_direction.east";
         else if (direction > -67.5 && direction <= -22.5)
-            d = "hud_info.cardinal_direction.south_east";
-        return d;
+            d = "cardinal_direction.south_east";
+        return ItemBlockInfoHud.lang(d);
     }
 }

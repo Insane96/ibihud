@@ -18,16 +18,6 @@ looking at certain blocks.
 
 ## To do
 
-### `searchable_containers`
-
-Items whose contents are searched for the info items. Contents are read generically from the vanilla
-`DataComponents.BUNDLE_CONTENTS` and `DataComponents.CONTAINER` components, plus any content provider registered
-through the API.
-
-- Replaces the hardcoded ISO Pouch id (`insanesurvivaloverhaul:pouch`) in `HudInfos`.
-- Shulker boxes are **not** in the tag by default, but a data pack can add them.
-- ISO adds the Pouch (uses `DataComponents.CONTAINER`) with `addOptional` in its datagen.
-
 ### API
 
 Internally, infos become a list of registered entries instead of hardcoded `tryRenderX` methods; the built-in infos
@@ -42,16 +32,6 @@ are simply the first ones registered. The public API then just exposes that inte
   - Vanilla components (`BUNDLE_CONTENTS`, `CONTAINER`) are handled by default.
 - Registration happens client-side (e.g. in `FMLClientSetupEvent`); to decide whether to expose it through a
   custom mod bus event or thread-safe static methods.
-
-### Lang
-
-Move the keys from `hud_info.*` to the mod's namespace, e.g.:
-
-- `itemblockinfohud.cardinal_direction.north` … `south_east`
-- `itemblockinfohud.depth` → `"Altitude: %d"`
-- `itemblockinfohud.time` → `"%s (Day: %d)"`
-
-Biome names use the vanilla `biome.<namespace>.<path>` keys.
 
 ## Ideas
 
