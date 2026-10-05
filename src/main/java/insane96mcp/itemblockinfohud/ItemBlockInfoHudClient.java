@@ -25,6 +25,6 @@ public class ItemBlockInfoHudClient {
     private static void onLoggingIn(ClientPlayerNetworkEvent.LoggingIn event) {
         if (event.getPlayer().connection.hasChannel(ServerPresencePayload.TYPE))
             return;
-        event.getPlayer().displayClientMessage(Component.translatable("itemblockinfohud.warning.missing_on_server").withStyle(ChatFormatting.YELLOW), false);
+        event.getPlayer().displayClientMessage(Component.translatable(ItemBlockInfoHud.lang("warning.missing_on_server")).withStyle(ChatFormatting.YELLOW), false);
     }
 }
