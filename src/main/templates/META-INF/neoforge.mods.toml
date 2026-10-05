@@ -15,6 +15,9 @@ version="${mod_version}" #mandatory
 
 displayName="${mod_name}" #mandatory
 
+# Don't show the red X in the server list if the server doesn't have the mod (a warning is shown in chat instead)
+displayTest="IGNORE_ALL_VERSION"
+
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional

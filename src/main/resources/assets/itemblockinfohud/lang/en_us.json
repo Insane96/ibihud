@@ -12,5 +12,7 @@
     "hud_info.cardinal_direction.east": "East",
     "hud_info.cardinal_direction.south_east": "South East",
     "hud_info.depth": "Altitude: %d",
-    "hud_info.time": "%s (Day: %d)"
+    "hud_info.time": "%s (Day: %d)",
+
+    "itemblockinfohud.warning.missing_on_server": "[Item & Block Info Hud] The mod won't work on this server: it must be installed on the server too."
 }

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.itemblockinfohud.data.generator.IBIHBlockTagsProvider;
 import insane96mcp.itemblockinfohud.data.generator.IBIHItemTagsProvider;
+import insane96mcp.itemblockinfohud.network.ServerPresencePayload;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +30,7 @@ public class ItemBlockInfoHud {
         modContainer.registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.spec);
 
         modEventBus.addListener(ItemBlockInfoHud::gatherData);
+        modEventBus.addListener(ServerPresencePayload::register);
     }
 
     public static void gatherData(GatherDataEvent event) {

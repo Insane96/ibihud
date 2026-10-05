@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @LoadFeature(name = "HUD Infos",
-        description = "Adds various infos on top left of the screen")
+        description = "Adds various infos on top left of the screen", canBeDisabled = false)
 public class HudInfos extends Feature {
     //TODO Temporary until searchable containers are data driven
     private static final ResourceLocation ISO_POUCH = ResourceLocation.fromNamespaceAndPath("insanesurvivaloverhaul", "pouch");
