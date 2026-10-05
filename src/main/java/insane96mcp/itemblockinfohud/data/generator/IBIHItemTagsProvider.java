@@ -17,10 +17,10 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class IBIHItemTagsProvider extends ItemTagsProvider {
-    public static final TagKey<Item> HUD_CARDINAL_DIRECTION = create("hud/cardinal_direction");
-    public static final TagKey<Item> HUD_DEPTH = create("hud/depth");
-    public static final TagKey<Item> HUD_TIME = create("hud/time");
-    public static final TagKey<Item> HUD_BIOME = create("hud/biome");
+    public static final TagKey<Item> CARDINAL_DIRECTION = create("cardinal_direction");
+    public static final TagKey<Item> DEPTH = create("depth");
+    public static final TagKey<Item> TIME = create("time");
+    public static final TagKey<Item> BIOME = create("biome");
 
     public IBIHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
@@ -28,14 +28,14 @@ public class IBIHItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
-        tag(HUD_CARDINAL_DIRECTION)
+        tag(CARDINAL_DIRECTION)
                 .add(Items.COMPASS);
-        tag(HUD_DEPTH)
+        tag(DEPTH)
                 .addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
                 .addOptional(ResourceLocation.parse("supplementaries:altimeter"));
-        tag(HUD_TIME)
+        tag(TIME)
                 .add(Items.CLOCK);
-        tag(HUD_BIOME);
+        tag(BIOME);
     }
 
     public static TagKey<Item> create(String tagName) {

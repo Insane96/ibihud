@@ -76,7 +76,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public static void tryRenderCardinalDirection(Player player, List<String> toDraw) {
         if (!cardinalDirection
-                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.HUD_CARDINAL_DIRECTION, IBIHBlockTagsProvider.HUD_CARDINAL_DIRECTION))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.CARDINAL_DIRECTION, IBIHBlockTagsProvider.CARDINAL_DIRECTION))
             return;
 
         renderCardinalDirection(player, toDraw);
@@ -92,7 +92,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public static void tryRenderDepth(Player player, List<String> toDraw) {
         if (!depth
-                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.HUD_DEPTH, IBIHBlockTagsProvider.HUD_DEPTH))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.DEPTH, IBIHBlockTagsProvider.DEPTH))
             return;
 
         renderDepth(player, toDraw);
@@ -106,7 +106,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public static void tryRenderBiome(Player player, List<String> toDraw) {
         if (!biome
-                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.HUD_BIOME, IBIHBlockTagsProvider.HUD_BIOME))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.BIOME, IBIHBlockTagsProvider.BIOME))
             return;
 
         renderBiome(player, toDraw);
@@ -123,7 +123,7 @@ public class HudInfos extends Feature {
     @OnlyIn(Dist.CLIENT)
     public static void tryRenderTime(Player player, List<String> toDraw) {
         if (!time
-                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.HUD_TIME, IBIHBlockTagsProvider.HUD_TIME))
+                || !shouldRender(player, Minecraft.getInstance().hitResult, IBIHItemTagsProvider.TIME, IBIHBlockTagsProvider.TIME))
             return;
 
         renderTime(player, toDraw);
