@@ -18,20 +18,6 @@ looking at certain blocks.
 
 ## To do
 
-### Tags without the `hud/` prefix
-
-Item tags:
-
-| Tag | Default |
-|---|---|
-| `itemblockinfohud:cardinal_direction` | `minecraft:compass` |
-| `itemblockinfohud:depth` | optional `supplementaries:altimeter`, optional `caverns_and_chasms:depth_gauge` |
-| `itemblockinfohud:time` | `minecraft:clock` |
-| `itemblockinfohud:biome` | empty |
-| `itemblockinfohud:searchable_containers` | `minecraft:bundle` |
-
-Block tags (empty by default): `cardinal_direction`, `depth`, `time`, `biome`.
-
 ### `searchable_containers`
 
 Items whose contents are searched for the info items. Contents are read generically from the vanilla
