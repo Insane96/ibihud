@@ -22,6 +22,8 @@ public class IBIHItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> TIME = create("time");
     public static final TagKey<Item> BIOME = create("biome");
 
+    public static final TagKey<Item> SEARCHABLE_CONTAINERS = create("searchable_containers");
+
     public IBIHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
     }
@@ -36,6 +38,9 @@ public class IBIHItemTagsProvider extends ItemTagsProvider {
         tag(TIME)
                 .add(Items.CLOCK);
         tag(BIOME);
+
+        tag(SEARCHABLE_CONTAINERS)
+                .add(Items.BUNDLE);
     }
 
     public static TagKey<Item> create(String tagName) {
