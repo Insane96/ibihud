@@ -1,6 +1,6 @@
 package insane96mcp.itemblockinfohud;
 
-import insane96mcp.itemblockinfohud.feature.HudInfos;
+import insane96mcp.itemblockinfohud.feature.IBIHFeature;
 import insane96mcp.itemblockinfohud.network.ServerPresencePayload;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ public class ItemBlockInfoHudClient {
     public ItemBlockInfoHudClient(IEventBus modEventBus, ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
-        modEventBus.addListener(HudInfos::registerGuiLayers);
+        modEventBus.addListener(IBIHFeature::registerGuiLayers);
         NeoForge.EVENT_BUS.addListener(ItemBlockInfoHudClient::onLoggingIn);
     }
 

@@ -14,5 +14,7 @@
     "itemblockinfohud.depth": "Altitude: %d",
     "itemblockinfohud.time": "%s (Day: %d)",
 
+    "itemblockinfohud.failed_to_get_biome": "Failed to get biome",
+
     "itemblockinfohud.warning.missing_on_server": "[Item & Block Info Hud] The mod won't work on this server: it must be installed on the server too."
 }

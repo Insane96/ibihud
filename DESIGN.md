@@ -24,8 +24,9 @@ Internally, infos become a list of registered entries instead of hardcoded `tryR
 are simply the first ones registered. The public API then just exposes that internal mechanism.
 
 - **HUD info registration**: another mod adds a line to the HUD.
-  - Data: id (`ResourceLocation`), item tag, block tag, enabled condition (e.g. a config option), and a renderer
+  - Data: id (`ResourceLocation`), enabled condition (e.g. a config option), and a renderer
     `(Player) -> Component` (nullable, or a list for multi-line infos).
+  - The id is also the name of both the item and the block tag that enable the info.
   - Registration order = render order.
 - **Content providers**: for containers with non-vanilla storage (custom backpacks, etc.).
   - E.g. `registerContentsProvider(Predicate<ItemStack>, Function<ItemStack, Iterable<ItemStack>>)`.

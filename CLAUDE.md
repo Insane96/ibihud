@@ -1,6 +1,7 @@
 Don't write code unless explicitly asked to.  
 Your job is to analyze user edits to check for errors or possible bugs.
 Ignore unused imports.
+Before decompiling mods, check if the source is available in this folder's folder.
 
 ## Project
 
@@ -24,11 +25,16 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
 - `ItemBlockInfoHud` — common entrypoint: registers the `CLIENT` config, datagen, network payload.
 - `ItemBlockInfoHudClient` — client entrypoint (`dist = Dist.CLIENT`): config screen, GUI layer, warning in chat on
   login if the server doesn't have the mod.
-- `feature/HudInfos` — the whole HUD: config toggles, GUI layer, the `tryRenderX`/`renderX` methods and the checks
-  (inventory, searchable containers via `CONTAINER`/`BUNDLE_CONTENTS` components, item frame, looked-at block).
-- `data/generator/IBIH{Item,Block}TagsProvider` — tag keys (`itemblockinfohud:cardinal_direction`, `depth`, `time`,
-  `biome`, plus item tag `searchable_containers`) and their default contents. Optional entries for other mods use
-  `addOptional`.
+- `data/HUDInfo` — a HUD line: id (also the name of its item and block tag), renderer `(Player) -> Component`,
+  enabled config option, and consumers filling its tags' default contents in datagen. Holds the registry (registration
+  order = render order) with the built-in infos (`cardinal_direction`, `depth`, `time`, `biome`); the registry is
+  frozen when the config spec is built.
+- `feature/IBIHFeature` — the whole HUD (`@LoadFeature` name "HUD Infos"): generates one config toggle per registered
+  `HUDInfo` (`loadConfigOptions`), GUI layer and the checks (inventory, searchable containers via
+  `CONTAINER`/`BUNDLE_CONTENTS` components, item frame, looked-at block).
+- `data/generator/IBIH{Item,Block}TagsProvider` — generate each `HUDInfo`'s tag through its consumers, plus the item
+  tag `searchable_containers`. Optional entries for other mods use `addOptional`.
+- `util/Utils` — cardinal direction lang key and time formatting.
 - `network/ServerPresencePayload` — never sent; registered as `optional()` only so the client can detect whether the
   server has the mod (`connection.hasChannel`).
 
