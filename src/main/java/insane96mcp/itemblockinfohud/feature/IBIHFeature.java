@@ -35,6 +35,12 @@ public class IBIHFeature extends Feature {
                 hudInfo.enabled = HUDInfo.defineConfig(getBuilder(), hudInfo));
     }
 
+    @Override
+    public void pushConfig() {}
+
+    @Override
+    protected void popConfig() {}
+
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ItemBlockInfoHud.id("hud_infos"), (guiGraphics, deltaTracker) -> {
             Minecraft mc = Minecraft.getInstance();
