@@ -1,8 +1,4 @@
 {
-    "itemblockinfohud.configuration.title": "Item & Block Info Hud Configs",
-    "itemblockinfohud.configuration.section.itemblockinfohud.client.toml": "Item & Block Info Hud Configs",
-    "itemblockinfohud.configuration.section.itemblockinfohud.client.toml.title": "Item & Block Info Hud Configs",
-
     "itemblockinfohud.cardinal_direction.south": "South",
     "itemblockinfohud.cardinal_direction.south_west": "South West",
     "itemblockinfohud.cardinal_direction.west": "West",

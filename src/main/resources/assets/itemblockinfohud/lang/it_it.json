@@ -1,0 +1,16 @@
+{
+    "itemblockinfohud.cardinal_direction.south": "Sud",
+    "itemblockinfohud.cardinal_direction.south_west": "Sud-Ovest",
+    "itemblockinfohud.cardinal_direction.west": "Ovest",
+    "itemblockinfohud.cardinal_direction.north_west": "No",
+    "itemblockinfohud.cardinal_direction.north": "Nord",
+    "itemblockinfohud.cardinal_direction.north_east": "Nord-Est",
+    "itemblockinfohud.cardinal_direction.east": "Est",
+    "itemblockinfohud.cardinal_direction.south_east": "Sud-Est",
+    "itemblockinfohud.depth": "Altitudine: %d",
+    "itemblockinfohud.time": "%s (Giorno: %d)",
+
+    "itemblockinfohud.failed_to_get_biome": "Impossibile ottenere il bioma",
+
+    "itemblockinfohud.warning.missing_on_server": "[Item & Block Info Hud] La mod non funzionerà su questo server: deve essere installata anche sul server."
+}
