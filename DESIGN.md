@@ -20,17 +20,20 @@ looking at certain blocks.
 
 ### API
 
-Internally, infos become a list of registered entries instead of hardcoded `tryRenderX` methods; the built-in infos
-are simply the first ones registered. The public API then just exposes that internal mechanism.
+Internally, infos are already a registry of `HUDInfo` entries (id, renderer `(Player) -> Component`, config toggle,
+tag consumers for datagen); the built-in infos are the first ones registered, registration order = render order, and
+the id is also the name of both the item and the block tag that enable the info. The public API just has to expose
+that mechanism.
 
 - **HUD info registration**: another mod adds a line to the HUD.
-  - Data: id (`ResourceLocation`), enabled condition (e.g. a config option), and a renderer
-    `(Player) -> Component` (nullable, or a list for multi-line infos).
-  - The id is also the name of both the item and the block tag that enable the info.
-  - Registration order = render order.
+  - The registry is currently frozen when the config spec is built (in the mod constructor), before other mods can
+    register: either move the spec building later, give external infos their own config, or collect registrations
+    before the spec is built.
+  - Renderer still to extend: nullable (info not shown) or a list for multi-line infos.
 - **Content providers**: for containers with non-vanilla storage (custom backpacks, etc.).
   - E.g. `registerContentsProvider(Predicate<ItemStack>, Function<ItemStack, Iterable<ItemStack>>)`.
-  - Vanilla components (`BUNDLE_CONTENTS`, `CONTAINER`) are handled by default.
+  - Vanilla components (`BUNDLE_CONTENTS`, `CONTAINER`) are handled by default, for items in the
+    `searchable_containers` tag.
 - Registration happens client-side (e.g. in `FMLClientSetupEvent`); to decide whether to expose it through a
   custom mod bus event or thread-safe static methods.
 

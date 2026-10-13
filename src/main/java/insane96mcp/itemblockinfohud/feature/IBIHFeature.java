@@ -8,6 +8,7 @@ import insane96mcp.itemblockinfohud.data.generator.IBIHItemTagsProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
@@ -48,18 +49,18 @@ public class IBIHFeature extends Feature {
             if (player == null || mc.getDebugOverlay().showDebugScreen() || !Feature.isEnabled(IBIHFeature.class) || mc.options.hideGui)
                 return;
 
-            ArrayList<String> toDraw = new ArrayList<>();
+            ArrayList<Component> toDraw = new ArrayList<>();
             HitResult hitResult = Minecraft.getInstance().hitResult;
             HUDInfo.getRegistry().forEach(hudInfo -> {
                 if (!hudInfo.enabled.get()
                         || !shouldRender(player, hitResult, hudInfo.itemTag, hudInfo.blockTag))
                     return;
-                toDraw.add(hudInfo.renderer.apply(player).getString());
+                toDraw.add(hudInfo.renderer.apply(player));
             });
 
             int y = 2;
-            for (String s : toDraw) {
-                guiGraphics.drawString(mc.font, s, 2, y, 0xFFFFFF);
+            for (Component component : toDraw) {
+                guiGraphics.drawString(mc.font, component, 2, y, 0xFFFFFF);
                 y += mc.font.lineHeight + 1;
             }
         });
