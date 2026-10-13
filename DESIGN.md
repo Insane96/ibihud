@@ -20,7 +20,7 @@ looking at certain blocks.
 
 ### API
 
-Internally, infos are already a registry of `HUDInfo` entries (id, renderer `(Player) -> Component`, config toggle,
+Internally, infos are already a registry of `HUDInfo` entries (id, renderer `(Player) -> List<Component>` (one per line), config toggle,
 tag consumers for datagen); the built-in infos are the first ones registered, registration order = render order, and
 the id is also the name of both the item and the block tag that enable the info. The public API just has to expose
 that mechanism.
@@ -29,7 +29,6 @@ that mechanism.
   - The registry is currently frozen when the config spec is built (in the mod constructor), before other mods can
     register: either move the spec building later, give external infos their own config, or collect registrations
     before the spec is built.
-  - Renderer still to extend: nullable (info not shown) or a list for multi-line infos.
 - **Content providers**: for containers with non-vanilla storage (custom backpacks, etc.).
   - E.g. `registerContentsProvider(Predicate<ItemStack>, Function<ItemStack, Iterable<ItemStack>>)`.
   - Vanilla components (`BUNDLE_CONTENTS`, `CONTAINER`) are handled by default, for items in the

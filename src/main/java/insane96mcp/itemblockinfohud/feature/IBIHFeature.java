@@ -55,7 +55,7 @@ public class IBIHFeature extends Feature {
                 if (!hudInfo.enabled.get()
                         || !shouldRender(player, hitResult, hudInfo.itemTag, hudInfo.blockTag))
                     return;
-                toDraw.add(hudInfo.renderer.apply(player));
+                toDraw.addAll(hudInfo.renderer.apply(player));
             });
 
             int y = 2;

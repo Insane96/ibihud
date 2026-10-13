@@ -25,7 +25,7 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
 - `ItemBlockInfoHud` — common entrypoint: registers the `CLIENT` config, datagen, network payload.
 - `ItemBlockInfoHudClient` — client entrypoint (`dist = Dist.CLIENT`): config screen, GUI layer, warning in chat on
   login if the server doesn't have the mod.
-- `data/HUDInfo` — a HUD line: id (also the name of its item and block tag), renderer `(Player) -> Component`,
+- `data/HUDInfo` — a HUD line: id (also the name of its item and block tag), renderer `(Player) -> List<Component>` (one per line),
   enabled config option, and consumers filling its tags' default contents in datagen. Holds the registry (registration
   order = render order) with the built-in infos (`cardinal_direction`, `depth`, `time`, `biome`); the registry is
   frozen when the config spec is built.

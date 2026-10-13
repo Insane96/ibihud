@@ -31,10 +31,10 @@ public class HUDInfo {
     public Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> itemTagConsumer;
     public TagKey<Block> blockTag;
     public Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> blockTagConsumer;
-    public Function<Player, Component> renderer;
+    public Function<Player, List<Component>> renderer;
     public ModConfigSpec.BooleanValue enabled;
 
-    private HUDInfo(ResourceLocation id, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> items, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> blocks, Function<Player, Component> renderer) {
+    private HUDInfo(ResourceLocation id, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> items, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> blocks, Function<Player, List<Component>> renderer) {
         this.id = id;
         this.itemTag = ItemTags.create(id);
         this.itemTagConsumer = items;
@@ -43,7 +43,7 @@ public class HUDInfo {
         this.renderer = renderer;
     }
 
-    public HUDInfo(ResourceLocation id, Function<Player, Component> renderer) {
+    public HUDInfo(ResourceLocation id, Function<Player, List<Component>> renderer) {
         this(id, tag -> {}, tag -> {}, renderer);
     }
 
@@ -56,7 +56,7 @@ public class HUDInfo {
                         player -> {
                             float direction = Mth.wrapDegrees(player.getYHeadRot());
                             String d = Utils.getDirectionTranslatable(direction);
-                            return Component.translatable(d);
+                            return List.of(Component.translatable(d));
                         }));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("depth"),
@@ -64,12 +64,12 @@ public class HUDInfo {
                                 tag.addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
                                 .addOptional(ResourceLocation.parse("supplementaries:altimeter")),
                         tag -> {},
-                        player -> Component.translatable(ItemBlockInfoHud.lang("depth"), player.getBlockY())));
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("depth"), player.getBlockY()))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("time"),
                         tag -> tag.add(Items.CLOCK),
                         tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
-                        player -> Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getDayTime()), player.level().getGameTime() / 24000)));
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getDayTime()), player.level().getGameTime() / 24000))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("biome"),
                         tag -> {},
@@ -77,10 +77,10 @@ public class HUDInfo {
                         player -> {
                             Holder<Biome> biome = player.level().getBiome(player.blockPosition());
                             if (biome.unwrapKey().isEmpty())
-                                return Component.translatable(ItemBlockInfoHud.lang("failed_to_get_biome"));
+                                return List.of(Component.translatable(ItemBlockInfoHud.lang("failed_to_get_biome")));
                             String name = biome.unwrapKey().get().location().toString();
                             name = name.replace(':', '.');
-                            return Component.translatable("biome." + name);
+                            return List.of(Component.translatable("biome." + name));
                         }));
     }
 
