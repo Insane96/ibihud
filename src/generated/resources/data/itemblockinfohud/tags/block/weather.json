@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:lightning_rod",
+    {
+      "id": "supplementaries:wind_vane",
+      "required": false
+    }
+  ]
+}

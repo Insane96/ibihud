@@ -1,7 +1,11 @@
-# Upcoming
+# 1.1.0.0-beta
+* Added position info (`itemblockinfohud:position`), enabled by the compass
+* Added moon phase info (`itemblockinfohud:moon_phase`), enabled by the clock and Supplementaries' clock block
+* Added weather info (`itemblockinfohud:weather`), enabled by looking at a lightning rod or Supplementaries' wind vane. Takes into account the biome (cloudy instead of rain in dry biomes, snow in cold biomes) and is hidden in dimensions without a sky (e.g. Nether and End)
+* Day has been split to own info (`itemblockinfohud:day`)
 * Removed `hud/` from tags (e.g. `itemblockinfohud:hud/time` has become `itemblockinfohud:time`)
 * Mod now shows a warning if not present server-side and allows connecting to servers that have it if not present client-side
-* Instead of searching items in hardcoded containers (bundles and ISO's Pouches), items are searched in any item in the `itemblockinfohud:searchable_containers` that uses the `minecraft:contents` or `minecraft:bundle_contents` data component
+* Instead of searching for items in hardcoded containers (bundles and ISO's Pouches), items are searched in any item in the `itemblockinfohud:searchable_containers` that uses the `minecraft:contents` or `minecraft:bundle_contents` data component
 * Changed translation keys to use the mod's namespace
 * Added italian translation
 

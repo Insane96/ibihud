@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
@@ -47,7 +48,6 @@ public class HUDInfo {
         this(id, tag -> {}, tag -> {}, renderer);
     }
 
-    //TODO Allow external mods to register custom HUDInfo. Right now it's frozen too early
     static {
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("cardinal_direction"),
@@ -59,6 +59,11 @@ public class HUDInfo {
                             return List.of(Component.translatable(d));
                         }));
         REGISTRY.add(
+                new HUDInfo(ItemBlockInfoHud.id("position"),
+                        tag -> tag.add(Items.COMPASS),
+                        tag -> {},
+                        player -> List.of(Component.literal(String.format("X: %d, Y: %d, Z: %d", player.getBlockX(), player.getBlockY(), player.getBlockZ())))));
+        REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("depth"),
                         tag ->
                                 tag.addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
@@ -69,7 +74,27 @@ public class HUDInfo {
                 new HUDInfo(ItemBlockInfoHud.id("time"),
                         tag -> tag.add(Items.CLOCK),
                         tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
-                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getDayTime()), player.level().getGameTime() / 24000))));
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getDayTime())))));
+        REGISTRY.add(
+                new HUDInfo(ItemBlockInfoHud.id("day"),
+                        tag -> tag.add(Items.CLOCK),
+                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("day"), player.level().getGameTime() / 24000))));
+        REGISTRY.add(
+                new HUDInfo(ItemBlockInfoHud.id("moon_phase"),
+                        tag -> tag.add(Items.CLOCK),
+                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("moon_phase"), Component.translatable(Utils.getMoonPhaseTranslatable(player.level().getMoonPhase()))))));
+        REGISTRY.add(
+                new HUDInfo(ItemBlockInfoHud.id("weather"),
+                        tag -> {},
+                        tag -> tag.add(Blocks.LIGHTNING_ROD)
+                                .addOptional(ResourceLocation.parse("supplementaries:wind_vane")),
+                        player -> {
+                            if (!player.level().dimensionType().hasSkyLight())
+                                return List.of();
+                            return List.of(Component.translatable(Utils.getWeatherTranslatable(player.level(), player.blockPosition())));
+                        }));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("biome"),
                         tag -> {},
