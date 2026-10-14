@@ -88,8 +88,7 @@ public class HUDInfo {
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("weather"),
                         tag -> {},
-                        tag -> tag.add(Blocks.LIGHTNING_ROD)
-                                .addOptional(ResourceLocation.parse("supplementaries:wind_vane")),
+                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:wind_vane")),
                         player -> {
                             if (!player.level().dimensionType().hasSkyLight())
                                 return List.of();
