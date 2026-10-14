@@ -74,7 +74,8 @@ public class IBIHFeature extends Feature {
     }
 
     private static boolean hasContainerWith(Player player, TagKey<Item> itemTag) {
-        for (ItemStack stack : player.getInventory().items) {
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
             if (stack.is(IBIHItemTagsProvider.SEARCHABLE_CONTAINERS) && containerContains(stack, itemTag))
                 return true;
         }
