@@ -1,7 +1,6 @@
 # 1.1.1.0
 * Fixed time minutes only going from 00 to 49
 * Day now starts from 1 instead of 0
-* Fixed day counter not following the time of day (e.g. after sleeping or using `/time set`)
 * Searchable containers in the offhand are now searched too
 * Lightning rod no longer enables the weather info
 

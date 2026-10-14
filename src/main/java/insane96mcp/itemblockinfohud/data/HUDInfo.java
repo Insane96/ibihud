@@ -78,7 +78,7 @@ public class HUDInfo {
                 new HUDInfo(ItemBlockInfoHud.id("day"),
                         tag -> tag.add(Items.CLOCK),
                         tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
-                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("day"), player.level().getDayTime() / 24000 + 1))));
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("day"), player.level().getGameTime() / 24000 + 1))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("moon_phase"),
                         tag -> tag.add(Items.CLOCK),
