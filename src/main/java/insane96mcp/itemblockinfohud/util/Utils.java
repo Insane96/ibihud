@@ -36,7 +36,7 @@ public class Utils {
 
     public static String ticksToTimeString(long ticks) {
         int hours = (int) ((ticks + 6000) % 24000 / 1000);
-        String minutes = String.format("%02d", ticks % 1000 / 20);
+        String minutes = String.format("%02d", ticks % 1000 * 60 / 1000);
         return hours + ":" + minutes;
     }
 
