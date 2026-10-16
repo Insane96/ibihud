@@ -3,13 +3,15 @@ package insane96mcp.itemblockinfohud.data;
 import insane96mcp.itemblockinfohud.ItemBlockInfoHud;
 import insane96mcp.itemblockinfohud.util.Utils;
 import net.minecraft.core.Holder;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -26,15 +28,15 @@ import java.util.function.Function;
 public class HUDInfo {
     private static List<HUDInfo> REGISTRY = new ArrayList<>();
 
-    public ResourceLocation id;
+    public Identifier id;
     public TagKey<Item> itemTag;
-    public Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> itemTagConsumer;
+    public Consumer<TagAppender<Item, Item>> itemTagConsumer;
     public TagKey<Block> blockTag;
-    public Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> blockTagConsumer;
+    public Consumer<TagAppender<Block, Block>> blockTagConsumer;
     public Function<Player, List<Component>> renderer;
     public ModConfigSpec.BooleanValue enabled;
 
-    private HUDInfo(ResourceLocation id, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Item>> items, Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<Block>> blocks, Function<Player, List<Component>> renderer) {
+    private HUDInfo(Identifier id, Consumer<TagAppender<Item, Item>> items, Consumer<TagAppender<Block, Block>> blocks, Function<Player, List<Component>> renderer) {
         this.id = id;
         this.itemTag = ItemTags.create(id);
         this.itemTagConsumer = items;
@@ -43,7 +45,7 @@ public class HUDInfo {
         this.renderer = renderer;
     }
 
-    public HUDInfo(ResourceLocation id, Function<Player, List<Component>> renderer) {
+    public HUDInfo(Identifier id, Function<Player, List<Component>> renderer) {
         this(id, tag -> {}, tag -> {}, renderer);
     }
 
@@ -65,29 +67,29 @@ public class HUDInfo {
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("depth"),
                         tag ->
-                                tag.addOptional(ResourceLocation.parse("caverns_and_chasms:depth_gauge"))
-                                .addOptional(ResourceLocation.parse("supplementaries:altimeter")),
+                                tag.add(TagEntry.optionalElement(Identifier.parse("caverns_and_chasms:depth_gauge")))
+                                .add(TagEntry.optionalElement(Identifier.parse("supplementaries:altimeter"))),
                         tag -> {},
                         player -> List.of(Component.translatable(ItemBlockInfoHud.lang("depth"), player.getBlockY()))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("time"),
                         tag -> tag.add(Items.CLOCK),
-                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
-                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getDayTime())))));
+                        tag -> tag.add(TagEntry.optionalElement(Identifier.parse("supplementaries:clock_block"))),
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("time"), Utils.ticksToTimeString(player.level().getOverworldClockTime())))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("day"),
                         tag -> tag.add(Items.CLOCK),
-                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
+                        tag -> tag.add(TagEntry.optionalElement(Identifier.parse("supplementaries:clock_block"))),
                         player -> List.of(Component.translatable(ItemBlockInfoHud.lang("day"), player.level().getGameTime() / 24000 + 1))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("moon_phase"),
                         tag -> tag.add(Items.CLOCK),
-                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:clock_block")),
-                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("moon_phase"), Component.translatable(Utils.getMoonPhaseTranslatable(player.level().getMoonPhase()))))));
+                        tag -> tag.add(TagEntry.optionalElement(Identifier.parse("supplementaries:clock_block"))),
+                        player -> List.of(Component.translatable(ItemBlockInfoHud.lang("moon_phase"), Component.translatable(Utils.getMoonPhaseTranslatable(player.level().environmentAttributes().getValue(EnvironmentAttributes.MOON_PHASE, player.blockPosition())))))));
         REGISTRY.add(
                 new HUDInfo(ItemBlockInfoHud.id("weather"),
                         tag -> {},
-                        tag -> tag.addOptional(ResourceLocation.parse("supplementaries:wind_vane")),
+                        tag -> tag.add(TagEntry.optionalElement(Identifier.parse("supplementaries:wind_vane"))),
                         player -> {
                             if (!player.level().dimensionType().hasSkyLight())
                                 return List.of();
@@ -101,7 +103,7 @@ public class HUDInfo {
                             Holder<Biome> biome = player.level().getBiome(player.blockPosition());
                             if (biome.unwrapKey().isEmpty())
                                 return List.of(Component.translatable(ItemBlockInfoHud.lang("failed_to_get_biome")));
-                            String name = biome.unwrapKey().get().location().toString();
+                            String name = biome.unwrapKey().get().identifier().toString();
                             name = name.replace(':', '.');
                             return List.of(Component.translatable("biome." + name));
                         }));

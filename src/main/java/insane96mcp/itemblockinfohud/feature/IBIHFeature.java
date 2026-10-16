@@ -6,7 +6,6 @@ import insane96mcp.itemblockinfohud.ItemBlockInfoHud;
 import insane96mcp.itemblockinfohud.data.HUDInfo;
 import insane96mcp.itemblockinfohud.data.generator.IBIHItemTagsProvider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
@@ -60,7 +59,7 @@ public class IBIHFeature extends Feature {
 
             int y = 2;
             for (Component component : toDraw) {
-                guiGraphics.drawString(mc.font, component, 2, y, 0xFFFFFF);
+                guiGraphics.text(mc.font, component, 2, y, 0xFFFFFFFF);
                 y += mc.font.lineHeight + 1;
             }
         });
@@ -83,10 +82,8 @@ public class IBIHFeature extends Feature {
     }
 
     private static boolean containerContains(ItemStack container, TagKey<Item> itemTag) {
-        NonNullList<ItemStack> list = NonNullList.create();
-        container.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(list);
-        list.addAll(container.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).itemCopyStream().toList());
-        return list.stream().anyMatch(s -> s.is(itemTag));
+        return container.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyItemCopyStream().anyMatch(s -> s.is(itemTag))
+                || container.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).itemCopyStream().anyMatch(s -> s.is(itemTag));
     }
 
     public static boolean isLookingAtItemFrameWith(@Nullable HitResult hitResult, TagKey<Item> itemTag) {

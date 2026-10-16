@@ -5,22 +5,19 @@ import insane96mcp.itemblockinfohud.data.HUDInfo;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class IBIHItemTagsProvider extends ItemTagsProvider {
     public static final TagKey<Item> SEARCHABLE_CONTAINERS = create("searchable_containers");
 
-    public IBIHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> completableFuture, CompletableFuture<TagLookup<Block>> tagLookupCompletableFuture, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(packOutput, completableFuture, tagLookupCompletableFuture, modId, existingFileHelper);
+    public IBIHItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(packOutput, lookupProvider, ItemBlockInfoHud.MOD_ID);
     }
 
     @Override

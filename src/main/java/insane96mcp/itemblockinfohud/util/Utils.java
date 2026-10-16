@@ -3,6 +3,7 @@ package insane96mcp.itemblockinfohud.util;
 import insane96mcp.itemblockinfohud.ItemBlockInfoHud;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.MoonPhase;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,8 +31,8 @@ public class Utils {
 
     private static final String[] MOON_PHASES = {"full_moon", "waning_gibbous", "last_quarter", "waning_crescent", "new_moon", "waxing_crescent", "first_quarter", "waxing_gibbous"};
 
-    public static String getMoonPhaseTranslatable(int moonPhase) {
-        return ItemBlockInfoHud.lang("moon_phase." + MOON_PHASES[Math.floorMod(moonPhase, MOON_PHASES.length)]);
+    public static String getMoonPhaseTranslatable(MoonPhase moonPhase) {
+        return ItemBlockInfoHud.lang("moon_phase." + MOON_PHASES[moonPhase.index()]);
     }
 
     public static String ticksToTimeString(long ticks) {
@@ -41,7 +42,7 @@ public class Utils {
     }
 
     public static String getWeatherTranslatable(Level level, BlockPos pos) {
-        Biome.Precipitation precipitation = level.getBiome(pos).value().getPrecipitationAt(pos);
+        Biome.Precipitation precipitation = level.getBiome(pos).value().getPrecipitationAt(pos, level.getSeaLevel());
         if (!level.isRaining())
             return ItemBlockInfoHud.lang("weather.clear");
         else if (level.isThundering())

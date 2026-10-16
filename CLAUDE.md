@@ -14,7 +14,7 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
 
 ## Stack
 
-- Minecraft 1.21.1, NeoForge (ModDevGradle), Java 21, Parchment mappings. Versions in `gradle.properties`.
+- Minecraft 26.1.2 (unobfuscated, no Parchment), NeoForge (ModDevGradle), Java 25. Versions in `gradle.properties`.
 - Depends on **InsaneLib** (from Modrinth maven): features are classes extending `Feature` annotated with
   `@LoadFeature`, config fields are `public static` fields annotated with `@Config`, loaded through `ILModConfig`.
 - `src/main/templates/META-INF/neoforge.mods.toml` is expanded with properties from `gradle.properties` by the
@@ -23,7 +23,7 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
 ## Structure (`src/main/java/insane96mcp/itemblockinfohud/`)
 
 - `ItemBlockInfoHud` — common entrypoint: registers the `CLIENT` config, datagen, network payload.
-- `ItemBlockInfoHudClient` — client entrypoint (`dist = Dist.CLIENT`): config screen, GUI layer, warning in chat on
+- `ItemBlockInfoHudClient` — client entrypoint (`dist = Dist.CLIENT`): GUI layer, warning in chat on
   login if the server doesn't have the mod.
 - `data/HUDInfo` — a HUD line: id (also the name of its item and block tag), renderer `(Player) -> List<Component>` (one per line),
   enabled config option, and consumers filling its tags' default contents in datagen. Holds the registry (registration
@@ -41,8 +41,8 @@ Design decisions, to do and ideas are in `DESIGN.md`; user-facing changes go in 
 ## Key constraints
 
 - The mod is needed server-side to work: tags are synced from the server and replace the client ones.
-  `displayTest="IGNORE_ALL_VERSION"` lets clients join servers without it (a chat warning is shown instead), and the
-  optional payload lets clients without it join servers that have it.
+  Clients can join servers without it (a chat warning is shown instead), and the optional payload lets clients
+  without it join servers that have it.
 - HUD toggles are client config only; the server decides which items/blocks enable the infos, only through tags.
 - Client-only code (`Minecraft`, GUI events) must not be reachable from the common entrypoint.
 - Lang keys use the mod namespace (`itemblockinfohud.*`, built with `ItemBlockInfoHud.lang(path)`); biome names use

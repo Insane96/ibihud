@@ -5,18 +5,13 @@ import insane96mcp.insanelib.setup.ILModConfig;
 import insane96mcp.itemblockinfohud.data.generator.IBIHBlockTagsProvider;
 import insane96mcp.itemblockinfohud.data.generator.IBIHItemTagsProvider;
 import insane96mcp.itemblockinfohud.network.ServerPresencePayload;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
-
-import java.util.concurrent.CompletableFuture;
 
 @Mod(ItemBlockInfoHud.MOD_ID)
 public class ItemBlockInfoHud {
@@ -33,23 +28,13 @@ public class ItemBlockInfoHud {
         modEventBus.addListener(ServerPresencePayload::register);
     }
 
-    public static void gatherData(GatherDataEvent event) {
-        PackOutput output = event.getGenerator().getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        IBIHBlockTagsProvider blockTagsProvider = new IBIHBlockTagsProvider(output, lookupProvider, MOD_ID, existingFileHelper);
-        event.getGenerator().addProvider(
-                event.includeServer(),
-                blockTagsProvider
-        );
-        event.getGenerator().addProvider(
-                event.includeServer(),
-                new IBIHItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper)
-        );
+    public static void gatherData(GatherDataEvent.Client event) {
+        event.createProvider(IBIHBlockTagsProvider::new);
+        event.createProvider(IBIHItemTagsProvider::new);
     }
 
-    public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static String lang(String path) {
