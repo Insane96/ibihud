@@ -1,3 +1,6 @@
+# 1.1.1.1
+* Fixed items inside containers using the `minecraft:container` component (e.g. Shulker Boxes) in the `itemblockinfohud:searchable_containers` tag not being searched
+
 # 1.1.1.0
 * Fixed time minutes only going from 00 to 49
 * Day now starts from 1 instead of 0
