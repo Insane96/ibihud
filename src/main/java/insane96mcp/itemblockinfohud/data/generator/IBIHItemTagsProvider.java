@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -28,7 +29,8 @@ public class IBIHItemTagsProvider extends ItemTagsProvider {
         HUDInfo.getRegistry().forEach(hudInfo -> hudInfo.itemTagConsumer.accept(tag(hudInfo.itemTag)));
 
         tag(SEARCHABLE_CONTAINERS)
-                .add(Items.BUNDLE);
+                .add(Items.BUNDLE)
+                .addOptionalTag(ResourceLocation.withDefaultNamespace("bundles"));
     }
 
     public static TagKey<Item> create(String tagName) {

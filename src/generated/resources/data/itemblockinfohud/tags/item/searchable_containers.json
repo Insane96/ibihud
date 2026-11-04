@@ -1,5 +1,9 @@
 {
   "values": [
-    "minecraft:bundle"
+    "minecraft:bundle",
+    {
+      "id": "#minecraft:bundles",
+      "required": false
+    }
   ]
 }

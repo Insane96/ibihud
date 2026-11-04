@@ -1,3 +1,6 @@
+# 1.1.1.2
+* Items in the optional `minecraft:bundles` tag are now searchable containers (e.g. colored bundles from Vanilla Backport)
+
 # 1.1.1.1
 * Fixed items inside containers using the `minecraft:container` component (e.g. Shulker Boxes) in the `itemblockinfohud:searchable_containers` tag not being searched
 
